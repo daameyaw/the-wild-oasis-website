@@ -5,7 +5,7 @@ import { useTransition } from "react";
 import { deleteReservation } from "../_lib/actions";
 import SpinnerMini from "./SpinnerMini";
 
-function DeleteReservation({ bookingId }) {
+function DeleteReservation({ bookingId, onDelete }) {
   // function deleteReservation() {
   //   "use server";
   // }
@@ -21,12 +21,13 @@ function DeleteReservation({ bookingId }) {
   // and prevents UI jank or blocking while the reservation is being deleted and the UI is updated.
   const [isPending, startTransition] = useTransition();
 
-
   //use useTransition when you are using server action in a component which is not a form.
   //it provides an isPending state that can be used to show a loading spinner or other UI while the transition is in progress.
   function handleDelete() {
     if (confirm("Are you sure you want to delete this reservation?"))
-      startTransition(() => deleteReservation(bookingId));
+      startTransition(() => {
+        onDelete(bookingId);
+      });
   }
   return (
     <button
