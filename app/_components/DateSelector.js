@@ -13,7 +13,6 @@ import { useReservation } from "./ReservationContext";
 function isAlreadyBooked(range, datesArr) {
   // Check if range exists and has valid from/to dates before accessing properties
   return (
-    range &&
     range.from &&
     range.to &&
     datesArr.some((date) =>
@@ -45,15 +44,24 @@ function DateSelector({ settings, bookedDates, cabin }) {
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
-        onSelect={setRange}
+        onSelect={(range) => {
+          setRange(range);
+          console.log(range);
+          // Handle the range selection
+        }}
         selected={displayRange}
         min={minBookingLength + 1}
         max={maxBookingLength}
         startMonth={new Date()}
-        fromDate={new Date()}
-        toYear={new Date().getFullYear() + 5}
+        endMonth={new Date(new Date().getFullYear() + 5, 11, 31)}
+        hidden={[
+          { before: new Date() },
+          { after: new Date(new Date().getFullYear() + 5, 11, 31) },
+        ]}
+        // toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
-        numberOfMonths={2}
+        numberOfMonths={2} // Disable dates that are either in the past or already booked.
+        // This prevents users from selecting unavailable dates for their reservation.
         disabled={(curDate) =>
           isPast(curDate) ||
           bookedDates.some((date) => isSameDay(date, curDate))
