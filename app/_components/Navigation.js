@@ -44,8 +44,16 @@ export default async function Navigation() {
             >
               Guest area
             </Link>
-          )}{" "}
+          )}
         </li>
+          <li>
+            <Link
+              href="/about"
+              className="hover:text-accent-400 transition-colors"
+            >
+              Login as Admin
+            </Link>
+          </li>
       </ul>
     </nav>
   );
