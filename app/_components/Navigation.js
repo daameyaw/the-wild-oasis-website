@@ -46,14 +46,14 @@ export default async function Navigation() {
             </Link>
           )}
         </li>
-          <li>
-            <Link
-              href="/about"
-              className="hover:text-accent-400 transition-colors"
-            >
-              Login as Admin
-            </Link>
-          </li>
+        <li>
+          <a
+            href="https://wild-oasis-kappa-roan.vercel.app"
+            className="hover:text-accent-400 transition-colors"
+          >
+            Login as Admin
+          </a>
+        </li>
       </ul>
     </nav>
   );
