@@ -12,8 +12,8 @@ export default async function Reservation({ cabin }) {
 `getBookedDatesByCabinId(params.cabinId)`, and `getSettings()`. */
 
   const [settings, bookedDates] = await Promise.all([
-    getBookedDatesByCabinId(cabin.id),
     getSettings(),
+    getBookedDatesByCabinId(cabin.id),
   ]);
 
   return (
