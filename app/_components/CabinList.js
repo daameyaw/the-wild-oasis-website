@@ -5,6 +5,8 @@ import { getCabin, getCabins } from "../_lib/data-service";
 export default async function CabinList({filter}) {
   const cabins = await getCabins();
 
+  console.log(cabins)
+
   let filteredCabins;
   if (filter === "small") {
     filteredCabins = cabins.filter((cabin) => cabin.maxCapacity <= 2);
